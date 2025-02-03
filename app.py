@@ -10,4 +10,5 @@ vehicles_df = pd.read_csv('vehicles_us.csv')
 # Create a title the app
 st.header('Vehicle Data Analysis')
 st.write('It is not a functional application yet. Under construction.')
+st.write(vehicles_df)
 
