@@ -6,9 +6,7 @@ import plotly.express as px
 import scipy as sp
 # Load the data frame
 vehicles_df = pd.read_csv('vehicles_us.csv')
-vehicles_df['price'] = vehicles_df['price'].astype('float')
-vehicles_df['date_posted'] = pd.to_datetime(vehicles_df['date_posted'], format='%Y-%m-%d')
-vehicles_df['days_listed'] = vehicles_df['days_listed'].astype('float')
+
 
 
 
