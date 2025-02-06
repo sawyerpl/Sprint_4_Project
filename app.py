@@ -48,7 +48,7 @@ average_price_df = filtered_df.groupby('type')['price'].mean().reset_index()
 
 
 
-average_price_fig = px.histogram(vehicles_df, x='type', y='price',
+average_price_fig = px.histogram(average_price_df, x='type', y='price',
                                  title='Average Price by Vehicle type manufactured by ' + make_selector + ' and in ' + str(condition_selector) + ' condition')
 st.plotly_chart(average_price_fig)
 
