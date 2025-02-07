@@ -38,7 +38,7 @@ make_selector = st.sidebar.multiselect(label='Select a Vehicle Make', options=ma
 
 filtered_df = vehicles_df[
     (vehicles_df['condition'].isin(condition_selector)) &
-    (vehicles_df['make'] == make_selector)
+    (vehicles_df['make'].isin(make_selector))
 ]
 # create a check box to show the filtered data frame
 df_check_box = st.sidebar.checkbox(label = 'Show Filtered DataFrame')
@@ -52,7 +52,7 @@ average_price_df = filtered_df.groupby('type')['price'].mean().reset_index()
 
 
 average_price_fig = px.histogram(average_price_df, x='type', y='price',
-                                 title='Average Price by Vehicle type manufactured by ' + make_selector + ' and in ' + str(condition_selector) + ' condition',
+                                 title='Average Price by Vehicle type manufactured by ' + str(make_selector) + ' and in ' + str(condition_selector) + ' condition',
                                  labels={'price': 'Average Price', 'type': 'Vehicle Type'})
 st.plotly_chart(average_price_fig)
 
