@@ -23,7 +23,9 @@ vehicles_df, condition_types, make_types = load_data()
 
 # Create a title the app
 st.header('Vehicle Data Analysis')
-st.write('It is not a functional application yet. Under construction.')
+st.write('Exploratory Data Analysis of Vehicle Data')
+st.write('The below data set and graph can be modified based on the inputs available on the sidebar')
+st.write('The data set will show how average price is effected by the condition of the vehilce, manufacturer of the vehicle, and the type of vehicle')
 
 
 
@@ -51,11 +53,16 @@ average_price_df = filtered_df.groupby('type')['price'].mean().reset_index()
 
 
 
-average_price_fig = px.histogram(average_price_df, x='type', y='price',
+average_price_fig = px.bar(average_price_df, x='type', y='price',
                                  title='Average Price by Vehicle type manufactured by ' + str(make_selector) + ' and in ' + str(condition_selector) + ' condition',
                                  labels={'price': 'Average Price', 'type': 'Vehicle Type'})
 st.plotly_chart(average_price_fig)
 
+
+# Create a scatter plot
+avg_price_days = vehicles_df.groupby('days_listed')['price'].mean().reset_index()
+days_listed_price = px.scatter(avg_price_days, x='days_listed', y='price', title='Scatter Plot Example', trendline='ols')
+st.plotly_chart(days_listed_price)
 
 
 
