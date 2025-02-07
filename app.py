@@ -60,9 +60,10 @@ st.plotly_chart(average_price_fig)
 
 
 # Create a scatter plot
-st.write('Scatter plot that displays the effect that the number of days a vehicle is listed has on the price of the vehicle')
+st.write('\n\n\n\nScatter plot that displays the effect that the number of days a vehicle is listed has on the price of the vehicle')
 avg_price_days = vehicles_df.groupby('days_listed')['price'].mean().reset_index()
-days_listed_price = px.scatter(avg_price_days, x='days_listed', y='price', title='Scatter Plot Example')
+days_listed_price = px.scatter(avg_price_days, x='days_listed', y='price', title='Average price of vehicles by the number of days listed',
+                               labels={'price': 'Average Price', 'days_listed': 'Days Listed'})
 st.plotly_chart(days_listed_price)
 
 
