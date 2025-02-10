@@ -9,12 +9,24 @@ import scipy as sp
 # Load the data frame
 def load_data():
 
-    """Loading the data frame and creating variables to be used in the script"""
+    """Loading the data frame and creating variables to be used in the script
+
+    Filling missing values for appropriate columns with median data points
+    
+    
+    """
 
     vehicles_df = pd.read_csv('vehicles_us.csv')
     vehicles_df['make'] = vehicles_df['model'].str.split(' ').str[0]
     make_types = vehicles_df['make'].unique()
     condition_types = vehicles_df['condition'].unique()
+    vehicles_df['model_year'] = vehicles_df.groupby('model')['model_year'].transform(lambda x: x.fillna(x.median()))
+    vehicles_df['cylinders'] = vehicles_df.groupby('model')['cylinders'].transform(lambda x: x.fillna(x.median()))
+    vehicles_df['odometer'] = vehicles_df.groupby('model')['odometer'].transform(lambda x: x.fillna(x.median()))
+    odom_median = vehicles_df['odometer'].median()
+    vehicles_df['odometer'] = vehicles_df['odometer'].fillna(odom_median)
+    vehicles_df['model_year'] = pd.to_datetime(vehicles_df['model_year'], format='%Y').dt.year
+    
 
     return vehicles_df, condition_types, make_types
 
